@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="200" viewBox="0 0 400 200">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#06204d"/>
+      <stop offset="1" stop-color="#0b5aa8"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="200" fill="url(#bg)"/>
+  <g fill="none" stroke="#5cc8ff" stroke-opacity=".45" stroke-width="2">
+    <path d="M0 40h60l20 20h60"/>
+    <path d="M0 150h40l25-25h70"/>
+    <path d="M400 30h-70l-20 25h-50"/>
+    <path d="M400 170h-50l-25-25h-60"/>
+    <circle cx="140" cy="60" r="4"/>
+    <circle cx="135" cy="125" r="4"/>
+    <circle cx="260" cy="55" r="4"/>
+    <circle cx="265" cy="145" r="4"/>
+  </g>
+  <g transform="translate(40 75)" fill="none" stroke="#9fe1ff" stroke-width="3">
+    <ellipse cx="25" cy="8" rx="25" ry="8"/>
+    <path d="M0 8v40c0 4.4 11.2 8 25 8s25-3.6 25-8V8"/>
+    <path d="M0 28c0 4.4 11.2 8 25 8s25-3.6 25-8"/>
+  </g>
+  <g transform="translate(305 80)" fill="#9fe1ff" fill-opacity=".85">
+    <rect x="0" y="30" width="10" height="20"/>
+    <rect x="15" y="18" width="10" height="32"/>
+    <rect x="30" y="8" width="10" height="42"/>
+    <rect x="45" y="0" width="10" height="50"/>
+  </g>
+  <rect x="105" y="78" width="190" height="44" rx="6" fill="#ffffff" fill-opacity=".92"/>
+  <text x="200" y="108" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-size="22" font-weight="700" fill="#06204d">ACCESO A DATOS</text>
+</svg>

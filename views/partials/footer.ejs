@@ -1,0 +1,26 @@
+  </main>
+</div>
+
+<div class="footer-popover">
+  <button class="btn-footer-help" type="button" data-toggle="dropdown" data-target="#footer-panel" aria-label="Mostrar pie de página">
+    <i class="fa fa-question"></i>
+  </button>
+  <div class="dropdown-menu footer-panel" id="footer-panel">
+    <% if (user) { %>
+      <p>Usted se ha identificado como <a href="/user/profile.php"><%= user.fullname %></a> (<a href="/login/logout.php">Cerrar sesión</a>)</p>
+    <% } else { %>
+      <p>Usted no se ha identificado. (<a href="/login/index.php">Acceder</a>)</p>
+    <% } %>
+    <p><a href="/">Página Principal</a></p>
+    <p><button type="button" class="link-button" data-modal="#modal-cookies">Aviso de Cookies</button></p>
+  </div>
+</div>
+
+<%- include('cookies-modal') %>
+
+<script src="/js/app.js"></script>
+<% (locals.scripts || []).forEach(src => { %>
+  <script src="<%= src %>"></script>
+<% }) %>
+</body>
+</html>

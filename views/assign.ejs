@@ -1,0 +1,112 @@
+<%- include('partials/header') %>
+<%- include('partials/breadcrumb') %>
+<%- include('partials/assign-intro') %>
+
+<%
+  const nowTs = fmt.now();
+  const submitted = submission && submission.status === 'submitted';
+  let remaining = '-';
+  let remainingClass = '';
+  if (submitted && activity.due_date) {
+    if (submission.modified <= activity.due_date) {
+      remaining = `La Tarea fue enviada ${fmt.duration(activity.due_date - submission.modified)} antes de la fecha límite`;
+      remainingClass = 'cell-success';
+    } else {
+      remaining = `La Tarea fue enviada con un retraso de ${fmt.duration(submission.modified - activity.due_date)}`;
+      remainingClass = 'cell-danger';
+    }
+  } else if (activity.due_date) {
+    if (activity.due_date > nowTs) {
+      remaining = fmt.duration(activity.due_date - nowTs);
+    } else {
+      remaining = `La Tarea está retrasada por: ${fmt.duration(nowTs - activity.due_date)}`;
+      remainingClass = 'text-overdue';
+    }
+  }
+%>
+
+<div class="submission-actions">
+  <% if (!submitted) { %>
+    <a class="btn btn-primary" href="/mod/assign/view.php?id=<%= activity.id %>&action=editsubmission">Agregar entrega</a>
+  <% } else { %>
+    <a class="btn btn-primary" href="/mod/assign/view.php?id=<%= activity.id %>&action=editsubmission">Editar entrega</a>
+    <% if (submission.grade === null) { %>
+      <form method="post" action="/mod/assign/view.php?id=<%= activity.id %>&action=removesubmission" class="inline-form" data-confirm="¿Está seguro de que desea borrar su entrega? Se eliminarán todos los archivos enviados.">
+        <button type="submit" class="btn btn-secondary">Borrar entrega</button>
+      </form>
+    <% } %>
+  <% } %>
+</div>
+
+<h2 class="h-section">Estado de la entrega</h2>
+<table class="generaltable submission-status">
+  <tbody>
+    <tr>
+      <th scope="row">Estado de la entrega</th>
+      <td class="<%= submitted ? 'cell-success' : '' %>"><%= submitted ? 'Enviado para calificar' : 'Todavía no se han realizado envíos' %></td>
+    </tr>
+    <tr>
+      <th scope="row">Estado de la calificación</th>
+      <td class="<%= submission && submission.grade !== null ? 'cell-success' : '' %>"><%= submission && submission.grade !== null ? 'Calificado' : 'Sin calificar' %></td>
+    </tr>
+    <tr>
+      <th scope="row">Tiempo restante</th>
+      <td class="<%= remainingClass %>"><%= remaining %></td>
+    </tr>
+    <tr>
+      <th scope="row">Última modificación</th>
+      <td><%= submitted ? fmt.userdate(submission.modified) : '-' %></td>
+    </tr>
+    <% if (submitted) { %>
+      <tr>
+        <th scope="row">Archivos enviados</th>
+        <td>
+          <ul class="submitted-files">
+            <% submission.files.forEach(f => { %>
+              <% const ext = (f.filename.split('.').pop() || '').toLowerCase(); %>
+              <% const fileIcon = ext === 'pdf' ? 'fa-file-pdf' : ['zip', 'rar', '7z'].includes(ext) ? 'fa-file-zipper' : ['doc', 'docx', 'odt'].includes(ext) ? 'fa-file-word' : ['png', 'jpg', 'jpeg', 'gif'].includes(ext) ? 'fa-file-image' : 'fa-file-lines'; %>
+              <li><i class="fa <%= fileIcon %> file-icon"></i> <a href="/pluginfile.php/submission/<%= f.id %>"><%= f.filename %></a> <span class="text-muted"><%= fmt.userdate(f.created) %></span></li>
+            <% }) %>
+          </ul>
+        </td>
+      </tr>
+    <% } %>
+    <tr>
+      <th scope="row">Comentarios de la entrega</th>
+      <td>
+        <div class="comments-widget" data-activity="<%= activity.id %>">
+          <a href="#" class="comments-toggle"><i class="fa fa-caret-right"></i> Comentarios (<span class="comments-count"><%= comments.length %></span>)</a>
+          <div class="comments-panel" hidden>
+            <ul class="comments-list">
+              <% comments.forEach(c => { %>
+                <li>
+                  <span class="avatar avatar-sm"><%= fmt.initials(c) %></span>
+                  <div><div class="comment-meta"><strong><%= fmt.fullname(c) %></strong> - <%= fmt.userdate(c.created) %></div><div><%= c.content %></div></div>
+                </li>
+              <% }) %>
+            </ul>
+            <textarea class="form-control comment-input" rows="2" placeholder="Agregar un comentario..." aria-label="Agregar un comentario"></textarea>
+            <div class="comment-actions">
+              <button type="button" class="link-button comment-save">Guardar comentario</button> |
+              <button type="button" class="link-button comment-cancel">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<% if (submission && submission.grade !== null) { %>
+  <h2 class="h-section">Comentario de retroalimentación</h2>
+  <table class="generaltable submission-status">
+    <tbody>
+      <tr><th scope="row">Calificación</th><td><%= fmt.grade(submission.grade) %> / 10,00</td></tr>
+      <tr><th scope="row">Calificado sobre</th><td><%= fmt.userdate(submission.graded_at) %></td></tr>
+      <tr><th scope="row">Calificado por</th><td><% if (grader) { %><span class="avatar avatar-sm"><%= fmt.initials(grader) %></span> <%= fmt.fullname(grader) %><% } %></td></tr>
+      <tr><th scope="row">Comentarios de retroalimentación</th><td><%- submission.feedback || '' %></td></tr>
+    </tbody>
+  </table>
+<% } %>
+
+<%- include('partials/footer', { scripts: ['/js/assign.js'] }) %>

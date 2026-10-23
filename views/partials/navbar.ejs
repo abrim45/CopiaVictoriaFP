@@ -1,0 +1,100 @@
+<nav class="navbar" aria-label="Navegación del sitio">
+  <button class="navbar-burger" type="button" data-toggle="dropdown" data-target="#primary-nav-mobile" aria-label="Menú lateral">
+    <i class="fa fa-bars"></i>
+  </button>
+  <div class="dropdown-menu mobile-nav" id="primary-nav-mobile">
+    <a href="/" class="<%= nav === 'home' ? 'active' : '' %>">Página Principal</a>
+    <% if (user) { %>
+      <a href="/my/" class="<%= nav === 'my' ? 'active' : '' %>">Área personal</a>
+      <a href="/my/courses.php" class="<%= nav === 'courses' ? 'active' : '' %>">Mis cursos</a>
+    <% } %>
+  </div>
+
+  <a class="navbar-brand" href="/" aria-label="Campus Virtual Victoria FP"><%- include('logo', { size: 'sm' }) %></a>
+
+  <ul class="primary-navigation">
+    <li><a href="/" class="<%= nav === 'home' ? 'active' : '' %>">Página Principal</a></li>
+    <% if (user) { %>
+      <li><a href="/my/" class="<%= nav === 'my' ? 'active' : '' %>">Área personal</a></li>
+      <li><a href="/my/courses.php" class="<%= nav === 'courses' ? 'active' : '' %>">Mis cursos</a></li>
+    <% } %>
+  </ul>
+
+  <div class="navbar-right">
+    <% if (user) { %>
+      <div class="popover-region" id="nav-notifications">
+        <button class="nav-icon-btn" type="button" data-toggle="dropdown" data-target="#notif-panel" aria-label="Mostrar ventana de notificaciones con <%= unreadCount %> notificaciones nuevas">
+          <i class="fa fa-bell"></i>
+          <% if (unreadCount) { %><span class="count-badge" id="notif-count"><%= unreadCount %></span><% } %>
+        </button>
+        <div class="popover-panel dropdown-menu" id="notif-panel">
+          <div class="popover-header">
+            <h3>Notificaciones</h3>
+            <div class="popover-actions">
+              <button type="button" class="icon-link" id="mark-all-read" title="Marcar todas como leídas"><i class="fa fa-check"></i></button>
+              <a href="/user/preferences.php" class="icon-link" title="Preferencias de notificación"><i class="fa fa-gear"></i></a>
+            </div>
+          </div>
+          <div class="popover-content">
+            <% if (!notifications.length) { %>
+              <p class="popover-empty">No tiene notificaciones</p>
+            <% } %>
+            <% notifications.forEach(n => { %>
+              <div class="notif-item<%= n.read ? '' : ' unread' %>">
+                <i class="fa fa-pen-fancy notif-icon"></i>
+                <div class="notif-body">
+                  <a class="notif-subject" href="<%= n.url || '#' %>"><%= n.subject %></a>
+                  <div class="notif-footer">
+                    <span class="notif-time"><%= fmt.timeAgo(n.created) %></span>
+                    <a href="/message/output/popup/notifications.php?notificationid=<%= n.id %>">Ver notificación completa</a>
+                  </div>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+          <a class="popover-footer" href="/message/output/popup/notifications.php">Ver todo</a>
+        </div>
+      </div>
+
+      <button class="nav-icon-btn" type="button" data-drawer="#drawer-messages" aria-label="Mostrar/ocultar el menú de mensajes">
+        <i class="fa fa-comment"></i>
+      </button>
+
+      <div class="usermenu">
+        <button class="usermenu-toggle" type="button" data-toggle="dropdown" data-target="#user-menu" aria-label="Menú de usuario">
+          <span class="avatar"><%= user.initials %></span>
+          <i class="fa fa-chevron-down caret"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" id="user-menu">
+          <div class="submenu-main">
+            <a href="/user/profile.php">Perfil</a>
+            <a href="/grade/report/overview/index.php">Calificaciones</a>
+            <a href="/calendar/view.php?view=month">Calendario</a>
+            <a href="/user/files.php">Archivos privados</a>
+            <a href="/report/usersessions/user.php">Informes</a>
+            <div class="dropdown-divider"></div>
+            <a href="/user/preferences.php">Preferencias</a>
+            <button type="button" class="submenu-open">Idioma <i class="fa fa-caret-right"></i></button>
+            <div class="dropdown-divider"></div>
+            <a href="/login/logout.php">Cerrar sesión</a>
+          </div>
+          <div class="submenu-lang" hidden>
+            <button type="button" class="submenu-back"><i class="fa fa-chevron-left"></i> Idioma</button>
+            <div class="dropdown-divider"></div>
+            <span class="dropdown-item-active"><i class="fa fa-check"></i> Español - Internacional ‎(es)‎</span>
+          </div>
+        </div>
+      </div>
+
+      <% if (editToggle) { %>
+        <label class="editmode-switch">
+          <span>Modo de edición</span>
+          <input type="checkbox" id="editmode-toggle" <%= editMode ? 'checked' : '' %>>
+          <span class="switch"></span>
+        </label>
+      <% } %>
+    <% } else { %>
+      <span class="login-info">Usted está como invitado (<a href="/login/index.php">Acceder</a>)</span>
+    <% } %>
+  </div>
+</nav>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %></title>
+  <link rel="icon" type="image/png" href="/img/logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="login-page">
+  <div class="login-wrapper">
+    <div class="login-container">
+      <div class="login-logo"><%- include('partials/logo', { size: 'lg' }) %></div>
+
+      <% if (error) { %>
+        <div class="alert alert-danger" role="alert"><%= error %></div>
+      <% } %>
+
+      <form class="login-form" method="post" action="/login/index.php">
+        <label class="sr-only" for="username">Nombre de usuario</label>
+        <input type="text" class="form-control form-control-lg" id="username" name="username" value="<%= username %>" placeholder="Nombre de usuario" autocomplete="username" autofocus>
+        <label class="sr-only" for="password">Contraseña</label>
+        <input type="password" class="form-control form-control-lg" id="password" name="password" placeholder="Contraseña" autocomplete="current-password">
+        <button type="submit" class="btn btn-primary btn-lg" id="loginbtn">Acceder</button>
+      </form>
+      <a class="login-forgot" href="/login/forgot_password.php">¿Olvidó su contraseña?</a>
+
+      <div class="login-divider"></div>
+      <h2 class="login-heading">Algunos cursos permiten el acceso de invitados</h2>
+      <form method="post" action="/login/guest">
+        <button type="submit" class="btn btn-secondary">Entrar como persona invitada</button>
+      </form>
+
+      <div class="login-divider"></div>
+      <div class="login-footer">
+        <div class="login-lang">
+          <button type="button" class="link-button" data-toggle="dropdown" data-target="#lang-menu">Español - Internacional ‎(es)‎ <i class="fa fa-chevron-down"></i></button>
+          <div class="dropdown-menu" id="lang-menu">
+            <span class="dropdown-item-active"><i class="fa fa-check"></i> Español - Internacional ‎(es)‎</span>
+          </div>
+        </div>
+        <div class="login-footer-sep"></div>
+        <button type="button" class="btn btn-secondary" data-modal="#modal-cookies">Aviso de Cookies</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-popover">
+    <button class="btn-footer-help" type="button" data-toggle="dropdown" data-target="#footer-panel" aria-label="Mostrar pie de página"><i class="fa fa-question"></i></button>
+    <div class="dropdown-menu footer-panel" id="footer-panel">
+      <p>Usted no se ha identificado.</p>
+      <p><button type="button" class="link-button" data-modal="#modal-cookies">Aviso de Cookies</button></p>
+    </div>
+  </div>
+  <%- include('partials/cookies-modal') %>
+  <script src="/js/app.js"></script>
+</body>
+</html>

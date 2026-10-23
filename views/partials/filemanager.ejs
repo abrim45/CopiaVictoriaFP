@@ -1,0 +1,33 @@
+<div class="filemanager" data-max-files="20" data-max-bytes="<%= 200 * 1024 * 1024 %>">
+  <div class="fm-toolbar">
+    <div class="fm-btn-group">
+      <button type="button" class="fm-btn fm-add" title="Agregar..."><i class="fa fa-circle-plus"></i></button>
+      <button type="button" class="fm-btn fm-mkdir" title="Crear carpeta" disabled><i class="fa fa-folder-plus"></i></button>
+    </div>
+    <div class="fm-btn-group fm-views">
+      <button type="button" class="fm-btn active" data-view="icons" title="Mostrar carpeta con iconos de archivo"><i class="fa fa-table-cells-large"></i></button>
+      <button type="button" class="fm-btn" data-view="list" title="Mostrar carpeta con detalles de archivo"><i class="fa fa-list"></i></button>
+      <button type="button" class="fm-btn" data-view="tree" title="Mostrar carpeta como árbol de archivos"><i class="fa fa-folder-tree"></i></button>
+    </div>
+  </div>
+  <div class="fm-path"><i class="fa fa-folder"></i> <a href="#">Archivos</a></div>
+  <div class="fm-content view-icons<%= files.length ? ' has-files' : '' %>">
+    <div class="fm-files">
+      <% files.forEach(f => { %>
+        <div class="fm-file" data-id="<%= f.id %>">
+          <a class="fm-file-icon" href="<%= downloadBase %><%= f.id %>" title="Descargar"><i class="fa fa-file-lines"></i></a>
+          <span class="fm-file-name" title="<%= f.filename %>"><%= f.filename %></span>
+          <span class="fm-file-size"><%= fmt.fileSize(f.size) %></span>
+          <button type="button" class="fm-file-remove" title="Borrar"><i class="fa fa-xmark"></i></button>
+        </div>
+      <% }) %>
+    </div>
+    <div class="fm-dropzone">
+      <i class="fa-regular fa-circle-down"></i>
+      <p>Puede arrastrar y soltar archivos aquí para añadirlos</p>
+    </div>
+  </div>
+  <input type="file" class="fm-input" multiple hidden>
+  <input type="hidden" name="remove" class="fm-remove" value="">
+  <div class="invalid-feedback fm-error"></div>
+</div>

@@ -1,0 +1,9 @@
+<%- include('partials/header') %>
+<%- include('partials/breadcrumb') %>
+
+<div class="resource-embed">
+  <iframe src="<%= fileUrl %>" title="<%= activity.filename %>"></iframe>
+</div>
+<p class="resource-link">Haga clic en el enlace <a href="<%= fileUrl %>" target="_blank" rel="noopener"><%= activity.filename %></a> para ver el archivo.</p>
+
+<%- include('partials/footer') %>

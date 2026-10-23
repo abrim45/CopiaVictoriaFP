@@ -1,0 +1,15 @@
+<aside class="drawer drawer-right drawer-messages" id="drawer-messages" aria-label="Mensajes">
+  <div class="drawer-header">
+    <h4>Mensajes</h4>
+    <button type="button" class="drawer-close" data-drawer="#drawer-messages" title="Cerrar"><i class="fa fa-xmark"></i></button>
+  </div>
+  <div class="drawer-content">
+    <input type="search" class="form-control" placeholder="Buscar" aria-label="Buscar">
+    <% ['Destacados', 'Grupo', 'Privado'].forEach(name => { %>
+      <details class="msg-section">
+        <summary><i class="fa fa-caret-right"></i> <%= name %> <span class="msg-count">(0)</span></summary>
+        <p class="text-muted">No hay conversaciones</p>
+      </details>
+    <% }) %>
+  </div>
+</aside>

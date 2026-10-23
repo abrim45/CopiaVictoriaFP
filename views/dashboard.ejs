@@ -1,0 +1,77 @@
+<%- include('partials/header', { scripts: ['/js/timeline.js', '/js/calendar.js', '/js/dashboard.js'] }) %>
+
+<h1 class="page-title">¡Hola, <%= user.firstname %>! <span class="wave" aria-hidden="true">👋</span></h1>
+
+<div class="edit-controls">
+  <button type="button" class="btn btn-primary" id="add-block"><i class="fa fa-plus"></i> Añadir un bloque</button>
+  <button type="button" class="btn btn-secondary" id="reset-blocks">Restablecer página a por defecto</button>
+</div>
+
+<section class="block card" data-block="timeline">
+  <div class="block-header">
+    <h5 class="block-title">Línea de tiempo</h5>
+    <div class="block-controls">
+      <button type="button" class="icon-link" data-toggle="dropdown" data-target="#timeline-actions" title="Acciones"><i class="fa fa-gear"></i></button>
+      <div class="dropdown-menu dropdown-menu-right" id="timeline-actions">
+        <button type="button" data-hide-block="timeline"><i class="fa fa-eye-slash"></i> Ocultar el bloque Línea de tiempo</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="timeline-controls">
+    <div class="dropdown">
+      <button type="button" class="btn btn-outline" data-toggle="dropdown" data-target="#timeline-filter"><span id="timeline-filter-label">Próximos 7 días</span> <i class="fa fa-chevron-down"></i></button>
+      <div class="dropdown-menu" id="timeline-filter">
+        <button type="button" data-filter="all">Todos</button>
+        <button type="button" data-filter="overdue">Vencidas</button>
+        <div class="dropdown-divider"></div>
+        <h6 class="dropdown-header">Fecha de vencimiento</h6>
+        <button type="button" data-filter="7" class="active">Próximos 7 días</button>
+        <button type="button" data-filter="30">Próximos 30 días</button>
+        <button type="button" data-filter="90">Próximos 3 meses</button>
+        <button type="button" data-filter="180">Próximos 6 meses</button>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button type="button" class="btn btn-outline" data-toggle="dropdown" data-target="#timeline-sort"><span id="timeline-sort-label">Ordenar por fecha</span> <i class="fa fa-chevron-down"></i></button>
+      <div class="dropdown-menu" id="timeline-sort">
+        <button type="button" data-sort="date" class="active">Ordenar por fecha</button>
+        <button type="button" data-sort="course">Ordenar por cursos</button>
+      </div>
+    </div>
+    <input type="search" class="form-control timeline-search" id="timeline-search" placeholder="Buscar por tipo o nombre de actividad" aria-label="Buscar por tipo o nombre de actividad">
+  </div>
+
+  <div id="timeline-list" class="timeline-list"></div>
+  <script type="application/json" id="timeline-data"><%- JSON.stringify(timeline).replace(/</g, '\\u003c') %></script>
+  <script type="application/json" id="assign-icon"><%- JSON.stringify(icons.ICONS.assign) %></script>
+</section>
+
+<section class="block card" data-block="calendar">
+  <div class="block-header">
+    <h5 class="block-title">Calendario</h5>
+    <div class="block-controls">
+      <button type="button" class="icon-link" data-toggle="dropdown" data-target="#calendar-actions" title="Acciones"><i class="fa fa-gear"></i></button>
+      <div class="dropdown-menu dropdown-menu-right" id="calendar-actions">
+        <button type="button" data-hide-block="calendar"><i class="fa fa-eye-slash"></i> Ocultar el bloque Calendario</button>
+      </div>
+    </div>
+  </div>
+  <%- include('partials/calendar-month', { selectedCourse: 0 }) %>
+</section>
+
+<div class="modal" id="modal-addblock" role="dialog" aria-modal="true" aria-labelledby="modal-addblock-title" hidden>
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <h5 id="modal-addblock-title">Añadir un bloque</h5>
+      <button type="button" class="modal-close" data-dismiss="modal" aria-label="Cerrar"><i class="fa fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="list-group" id="addblock-list"></div>
+      <p class="text-muted" id="addblock-empty">No hay bloques disponibles para añadir.</p>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/event-modals') %>
+<%- include('partials/footer', { scripts: ['/js/timeline.js', '/js/calendar.js', '/js/dashboard.js'] }) %>

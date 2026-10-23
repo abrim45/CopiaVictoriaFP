@@ -1,0 +1,24 @@
+<%- include('partials/header') %>
+<%- include('partials/course-header') %>
+
+<h2 class="h-section">Participantes</h2>
+<p class="text-muted"><%= participants.length %> participantes encontrados</p>
+<div class="table-responsive">
+  <table class="generaltable">
+    <thead>
+      <tr><th>Nombre / Apellido(s)</th><th>Roles</th><th>Grupos</th><th>Último acceso al curso</th></tr>
+    </thead>
+    <tbody>
+      <% participants.forEach(p => { %>
+        <tr>
+          <td><span class="avatar avatar-sm"><%= p.initials %></span> <%= p.fullname %></td>
+          <td><%= p.role === 'editingteacher' ? 'Profesor' : 'Estudiante' %></td>
+          <td>Ningún grupo</td>
+          <td><%= p.courseaccess ? fmt.duration(fmt.now() - p.courseaccess) : 'Nunca' %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %></title>
+  <link rel="icon" type="image/png" href="/img/logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="<%= locals.bodyClass || '' %><%= courseIndex ? ' has-courseindex' : '' %><%= blockDrawer ? ' has-blocks' : '' %><%= editMode && editToggle ? ' editing' : '' %>">
+
+<%- include('navbar') %>
+
+<% if (courseIndex) { %>
+  <%- include('course-index') %>
+<% } %>
+<% if (blockDrawer) { %>
+  <%- include('block-drawer') %>
+<% } %>
+<% if (user) { %>
+  <%- include('messages-drawer') %>
+<% } %>
+
+<div id="page">
+  <main id="region-main" class="main-inner<%= locals.wide ? ' wide' : '' %>">

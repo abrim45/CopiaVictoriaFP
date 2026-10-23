@@ -1,0 +1,36 @@
+<%- include('partials/header') %>
+
+<h1 class="page-title"><%= user.fullname %></h1>
+<h2 class="h-section">Editar perfil</h2>
+
+<% if (error) { %><div class="alert alert-danger" role="alert"><%= error %></div><% } %>
+
+<form class="mform" method="post" action="/user/edit.php">
+  <div class="form-row">
+    <label class="col-form-label" for="firstname">Nombre <i class="fa fa-circle-exclamation text-danger" title="Requerido"></i></label>
+    <div class="form-field"><input class="form-control" id="firstname" name="firstname" value="<%= user.firstname %>" required></div>
+  </div>
+  <div class="form-row">
+    <label class="col-form-label" for="lastname">Apellido(s) <i class="fa fa-circle-exclamation text-danger" title="Requerido"></i></label>
+    <div class="form-field"><input class="form-control" id="lastname" name="lastname" value="<%= user.lastname %>" required></div>
+  </div>
+  <div class="form-row">
+    <label class="col-form-label" for="email">Dirección de correo <i class="fa fa-circle-exclamation text-danger" title="Requerido"></i></label>
+    <div class="form-field"><input type="email" class="form-control" id="email" name="email" value="<%= user.email %>" required></div>
+  </div>
+  <div class="form-row">
+    <label class="col-form-label" for="city">Ciudad</label>
+    <div class="form-field"><input class="form-control" id="city" name="city" value="<%= user.city %>"></div>
+  </div>
+  <div class="form-row">
+    <label class="col-form-label" for="description">Descripción</label>
+    <div class="form-field"><textarea class="form-control" id="description" name="description" rows="5"><%= user.description %></textarea></div>
+  </div>
+  <hr class="form-separator">
+  <div class="form-buttons">
+    <button type="submit" class="btn btn-primary">Actualizar información personal</button>
+    <a class="btn btn-secondary" href="/user/profile.php">Cancelar</a>
+  </div>
+</form>
+
+<%- include('partials/footer') %>

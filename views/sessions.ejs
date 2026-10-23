@@ -1,0 +1,18 @@
+<%- include('partials/header') %>
+
+<h1 class="page-title">Sesiones del navegador</h1>
+<div class="table-responsive">
+  <table class="generaltable">
+    <thead><tr><th>Acceso</th><th>Último acceso</th><th>Última dirección IP</th><th></th></tr></thead>
+    <tbody>
+      <tr>
+        <td><%= fmt.userdate(session.loginTime) %></td>
+        <td><%= fmt.userdate(user.lastaccess) %></td>
+        <td><%= session.ip %></td>
+        <td>Sesión actual</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<%- include('partials/footer') %>

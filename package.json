@@ -1,0 +1,22 @@
+{
+  "name": "campus-victoria-fp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Réplica local del Campus Virtual Victoria FP (Moodle 4) con Express, EJS y SQLite",
+  "main": "server.js",
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning server.js",
+    "dev": "node --watch --disable-warning=ExperimentalWarning server.js",
+    "seed": "node --disable-warning=ExperimentalWarning db/seed.js"
+  },
+  "engines": {
+    "node": ">=22.13"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "ejs": "^7.0.2",
+    "express": "^4.22.3",
+    "express-session": "^1.19.0",
+    "multer": "^2.5.0"
+  }
+}

@@ -1,0 +1,9 @@
+<%- include('partials/header', { wide: true }) %>
+
+<h1 class="page-title">Calendario</h1>
+<section class="block card calendar-page">
+  <%- include('partials/calendar-month', { selectedCourse }) %>
+</section>
+
+<%- include('partials/event-modals') %>
+<%- include('partials/footer', { scripts: ['/js/calendar.js'] }) %>

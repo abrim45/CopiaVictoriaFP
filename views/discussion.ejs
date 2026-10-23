@@ -1,0 +1,25 @@
+<%- include('partials/header', { pageHeading: activity.name }) %>
+<%- include('partials/breadcrumb', { pageHeading: activity.name }) %>
+
+<h2 class="h-section"><%= discussion.subject %></h2>
+
+<% posts.forEach((p, i) => { %>
+  <article class="forum-post card" <%- i === posts.length - 1 ? 'id="ultimo"' : '' %>>
+    <span class="avatar"><%= p.initials %></span>
+    <div class="forum-post-body">
+      <h3 class="forum-post-subject"><%= i === 0 ? discussion.subject : 'Re: ' + discussion.subject %></h3>
+      <div class="forum-post-meta">de <a href="#"><%= p.fullname %></a> - <%= fmt.userdate(p.created) %></div>
+      <div class="forum-post-message"><%= p.message %></div>
+    </div>
+  </article>
+<% }) %>
+
+<form class="mform forum-reply card" method="post" action="/mod/forum/discuss.php?d=<%= discussion.id %>">
+  <label for="reply" class="forum-reply-label">Responder</label>
+  <textarea class="form-control" id="reply" name="message" rows="4" placeholder="Escriba su respuesta..." required></textarea>
+  <div class="form-buttons">
+    <button type="submit" class="btn btn-primary">Enviar al foro</button>
+  </div>
+</form>
+
+<%- include('partials/footer') %>

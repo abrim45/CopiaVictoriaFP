@@ -1,0 +1,19 @@
+<%- include('partials/header') %>
+
+<h1 class="page-title">Calificaciones</h1>
+<h2 class="h-section">Cursos en los que estoy matriculado</h2>
+<div class="table-responsive">
+  <table class="generaltable">
+    <thead><tr><th>Nombre del curso</th><th>Calificación</th></tr></thead>
+    <tbody>
+      <% rows.forEach(r => { %>
+        <tr>
+          <td><a href="/grade/report/user/index.php?id=<%= r.id %>"><%= r.fullname %></a></td>
+          <td><%= fmt.grade(r.grade) %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('partials/footer') %>

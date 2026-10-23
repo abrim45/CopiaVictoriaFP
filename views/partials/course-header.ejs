@@ -1,0 +1,9 @@
+<h1 class="page-title course-title"><%= course.fullname %></h1>
+<nav class="secondary-navigation" aria-label="Navegación del curso">
+  <ul>
+    <li><a href="/course/view.php?id=<%= course.id %>" class="<%= tab === 'course' ? 'active' : '' %>">Curso</a></li>
+    <li><a href="/user/index.php?id=<%= course.id %>" class="<%= tab === 'participants' ? 'active' : '' %>">Participantes</a></li>
+    <li><a href="/grade/report/user/index.php?id=<%= course.id %>" class="<%= tab === 'grades' ? 'active' : '' %>">Calificaciones</a></li>
+    <li><a href="/admin/tool/lp/coursecompetencies.php?courseid=<%= course.id %>" class="<%= tab === 'competencies' ? 'active' : '' %>">Competencias</a></li>
+  </ul>
+</nav>

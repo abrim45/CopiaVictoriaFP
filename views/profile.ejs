@@ -1,0 +1,59 @@
+<%- include('partials/header') %>
+
+<div class="profile-header">
+  <span class="avatar avatar-xl"><%= user.initials %></span>
+  <h1 class="page-title"><%= user.fullname %></h1>
+</div>
+
+<div class="profile-grid">
+  <section class="card profile-card">
+    <div class="profile-card-header">
+      <h3>Detalles de usuario</h3>
+      <a href="/user/edit.php">Editar perfil</a>
+    </div>
+    <dl>
+      <dt>Dirección de correo</dt><dd><a href="mailto:<%= user.email %>"><%= user.email %></a></dd>
+      <dt>País</dt><dd><%= user.country %></dd>
+      <% if (user.city) { %><dt>Ciudad</dt><dd><%= user.city %></dd><% } %>
+      <dt>Zona horaria</dt><dd>Europe/Madrid</dd>
+      <% if (user.description) { %><dt>Descripción</dt><dd><%= user.description %></dd><% } %>
+    </dl>
+  </section>
+
+  <section class="card profile-card">
+    <h3>Detalles de curso</h3>
+    <dl>
+      <dt>Perfiles de curso</dt>
+      <dd>
+        <ul class="plain-list">
+          <% courses.forEach(c => { %><li><a href="/course/view.php?id=<%= c.id %>"><%= c.fullname %></a></li><% }) %>
+        </ul>
+      </dd>
+    </dl>
+  </section>
+
+  <section class="card profile-card">
+    <h3>Privacidad y políticas</h3>
+    <ul class="plain-list">
+      <li><button type="button" class="link-button" data-modal="#modal-cookies">Aviso de Cookies</button></li>
+    </ul>
+  </section>
+
+  <section class="card profile-card">
+    <h3>Informes</h3>
+    <ul class="plain-list">
+      <li><a href="/report/usersessions/user.php">Sesiones del navegador</a></li>
+      <li><a href="/grade/report/overview/index.php">Resumen de calificaciones</a></li>
+    </ul>
+  </section>
+
+  <section class="card profile-card">
+    <h3>Actividad de accesos</h3>
+    <dl>
+      <dt>Primer acceso al sitio</dt><dd><%= fmt.userdate(user.firstaccess) %> (<%= fmt.timeAgo(user.firstaccess) %>)</dd>
+      <dt>Último acceso al sitio</dt><dd><%= fmt.userdate(user.lastaccess) %> (ahora)</dd>
+    </dl>
+  </section>
+</div>
+
+<%- include('partials/footer') %>

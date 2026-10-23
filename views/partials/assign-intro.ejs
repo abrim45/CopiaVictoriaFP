@@ -1,0 +1,10 @@
+<div class="activity-description-box">
+  <div class="activity-dates-block">
+    <% if (activity.open_date) { %><div><strong>Apertura:</strong> <%= fmt.userdate(activity.open_date) %></div><% } %>
+    <% if (activity.due_date) { %><div><strong>Cierre:</strong> <%= fmt.userdate(activity.due_date) %></div><% } %>
+  </div>
+  <% if (activity.intro) { %>
+    <hr>
+    <div class="activity-intro"><%- activity.intro %></div>
+  <% } %>
+</div>

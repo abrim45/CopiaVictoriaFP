@@ -1,0 +1,23 @@
+<button class="drawer-toggler drawer-toggler-right" type="button" data-drawer="#drawer-blocks" title="Abrir el cajón de bloques">
+  <i class="fa fa-chevron-left"></i>
+</button>
+<aside class="drawer drawer-right" id="drawer-blocks" aria-label="Bloques">
+  <div class="drawer-header">
+    <button type="button" class="drawer-close" data-drawer="#drawer-blocks" title="Cerrar el cajón de bloques"><i class="fa fa-xmark"></i></button>
+  </div>
+  <div class="drawer-content">
+    <section class="block card">
+      <h5 class="block-title">Usuarios en línea</h5>
+      <p class="block-subtitle"><%= (locals.onlineUsers || []).length %> usuarios en línea (últimos 5 minutos)</p>
+      <ul class="online-users">
+        <% (locals.onlineUsers || []).forEach(u => { %>
+          <li><span class="avatar avatar-sm"><%= u.initials %></span> <%= u.fullname %></li>
+        <% }) %>
+      </ul>
+    </section>
+    <section class="block card">
+      <h5 class="block-title">Archivos privados</h5>
+      <p><a href="/user/files.php">Gestionar archivos privados...</a></p>
+    </section>
+  </div>
+</aside>

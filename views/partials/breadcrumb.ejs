@@ -1,0 +1,13 @@
+<nav aria-label="Barra de navegación">
+  <ol class="breadcrumb">
+    <% breadcrumb.forEach(item => { %>
+      <li class="breadcrumb-item">
+        <% if (item.url) { %><a href="<%= item.url %>"><%= item.name %></a><% } else { %><span aria-current="page"><%= item.name %></span><% } %>
+      </li>
+    <% }) %>
+  </ol>
+</nav>
+<div class="activity-header">
+  <%- icons.modIcon(activity.type, 'activityicon-lg') %>
+  <h1 class="page-title"><%= locals.pageHeading || activity.name %></h1>
+</div>

@@ -1,0 +1,20 @@
+<%- include('partials/header') %>
+
+<h1 class="page-title">Archivos privados</h1>
+
+<form class="mform filemanager-form" method="post" action="/user/files.php" enctype="multipart/form-data">
+  <div class="form-row">
+    <label class="col-form-label">Archivos</label>
+    <div class="form-field">
+      <div class="filemanager-limits">Tamaño máximo para archivos nuevos: 200 MB, número máximo de archivos: 20</div>
+      <%- include('partials/filemanager', { files, downloadBase: '/pluginfile.php/private/' }) %>
+    </div>
+  </div>
+  <hr class="form-separator">
+  <div class="form-buttons">
+    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    <a class="btn btn-secondary" href="/my/">Cancelar</a>
+  </div>
+</form>
+
+<%- include('partials/footer', { scripts: ['/js/filemanager.js'] }) %>

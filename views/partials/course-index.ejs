@@ -1,0 +1,31 @@
+<button class="drawer-toggler drawer-toggler-left" type="button" data-drawer="#drawer-courseindex" title="Abrir índice del curso">
+  <i class="fa fa-list-ul"></i>
+</button>
+<aside class="drawer drawer-left" id="drawer-courseindex" aria-label="Índice del curso">
+  <div class="drawer-header">
+    <button type="button" class="drawer-close" data-drawer="#drawer-courseindex" title="Cerrar índice del curso"><i class="fa fa-xmark"></i></button>
+  </div>
+  <div class="drawer-content">
+    <a class="courseindex-title" href="/course/view.php?id=<%= courseIndex.course.id %>"><%= courseIndex.course.fullname %></a>
+    <% courseIndex.sections.forEach(s => { %>
+      <div class="courseindex-section">
+        <div class="courseindex-section-title">
+          <button type="button" class="courseindex-chevron" aria-expanded="true"><i class="fa fa-chevron-down"></i></button>
+          <a href="/course/view.php?id=<%= courseIndex.course.id %>#section-<%= s.position %>"><%= s.name %></a>
+        </div>
+        <ul class="courseindex-items">
+          <% s.activities.forEach(a => { %>
+            <li class="<%= courseIndex.activeActivityId === a.id ? 'active' : '' %>">
+              <a href="<%= icons.modUrl(a) %>"><%= a.name %></a>
+              <% if (courseIndex.course.enablecompletion) { %>
+                <span class="completion-dot<%= a.complete ? ' done' : '' %>" title="<%= a.complete ? 'Hecho' : 'Pendiente' %>">
+                  <% if (a.complete) { %><i class="fa fa-check"></i><% } %>
+                </span>
+              <% } %>
+            </li>
+          <% }) %>
+        </ul>
+      </div>
+    <% }) %>
+  </div>
+</aside>

@@ -1,0 +1,65 @@
+<div class="modal" id="modal-new-event" role="dialog" aria-modal="true" aria-labelledby="modal-new-event-title" hidden>
+  <div class="modal-dialog modal-lg">
+    <form id="new-event-form" novalidate>
+      <div class="modal-header">
+        <h5 id="modal-new-event-title">Nuevo evento</h5>
+        <button type="button" class="modal-close" data-dismiss="modal" aria-label="Cerrar"><i class="fa fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <label class="col-form-label" for="ev-name">Título del evento <i class="fa fa-circle-exclamation text-danger" title="Requerido"></i></label>
+          <div class="form-field">
+            <input type="text" class="form-control" id="ev-name" name="name" maxlength="255">
+            <div class="invalid-feedback" id="ev-name-error">Requerido</div>
+          </div>
+        </div>
+        <div class="form-row">
+          <label class="col-form-label">Fecha</label>
+          <div class="form-field date-selectors">
+            <select class="custom-select" name="day" aria-label="Día"></select>
+            <select class="custom-select" name="month" aria-label="Mes"></select>
+            <select class="custom-select" name="year" aria-label="Año"></select>
+            <select class="custom-select" name="hour" aria-label="Hora"></select>
+            <select class="custom-select" name="minute" aria-label="Minuto"></select>
+            <button type="button" class="icon-link calendar-picker" title="Calendario"><i class="fa fa-calendar"></i></button>
+            <input type="date" class="hidden-date" tabindex="-1" aria-hidden="true">
+            <div class="invalid-feedback" id="ev-date-error"></div>
+          </div>
+        </div>
+        <a href="#" class="show-more">Mostrar más...</a>
+        <div class="more-fields" hidden>
+          <div class="form-row">
+            <label class="col-form-label" for="ev-description">Descripción</label>
+            <div class="form-field"><textarea class="form-control" id="ev-description" name="description" rows="4"></textarea></div>
+          </div>
+          <div class="form-row">
+            <label class="col-form-label" for="ev-location">Ubicación</label>
+            <div class="form-field"><input type="text" class="form-control" id="ev-location" name="location"></div>
+          </div>
+          <div class="form-row">
+            <label class="col-form-label" for="ev-duration">Duración en minutos</label>
+            <div class="form-field"><input type="number" class="form-control input-short" id="ev-duration" name="duration" min="0" value="0"></div>
+          </div>
+        </div>
+        <div class="required-note"><i class="fa fa-circle-exclamation text-danger"></i> Requerido</div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal" id="modal-event" role="dialog" aria-modal="true" aria-labelledby="modal-event-title" hidden>
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <h5 id="modal-event-title"></h5>
+      <button type="button" class="modal-close" data-dismiss="modal" aria-label="Cerrar"><i class="fa fa-xmark"></i></button>
+    </div>
+    <div class="modal-body event-details"></div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" id="event-delete" hidden>Borrar</button>
+      <a class="btn btn-primary" id="event-go" hidden>Ir a la actividad</a>
+    </div>
+  </div>
+</div>

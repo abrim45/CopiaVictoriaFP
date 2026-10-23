@@ -1,0 +1,22 @@
+<div class="calendar-widget" data-course="<%= selectedCourse %>">
+  <div class="calendar-controls">
+    <select class="custom-select calendar-course" aria-label="Curso">
+      <option value="0">Todos los cursos</option>
+      <% courses.forEach(c => { %>
+        <option value="<%= c.id %>" <%= selectedCourse === c.id ? 'selected' : '' %>><%= c.fullname %></option>
+      <% }) %>
+    </select>
+    <button type="button" class="btn btn-primary btn-new-event">Nuevo evento</button>
+  </div>
+  <div class="calendar-nav">
+    <a href="#" class="cal-prev"><i class="fa fa-arrow-left"></i> <span></span></a>
+    <h4 class="cal-current"></h4>
+    <a href="#" class="cal-next"><span></span> <i class="fa fa-arrow-right"></i></a>
+  </div>
+  <table class="calendarmonth">
+    <thead>
+      <tr><th>Lun</th><th>Mar</th><th>Mié</th><th>Jue</th><th>Vie</th><th>Sáb</th><th>Dom</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>

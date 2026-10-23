@@ -1,0 +1,32 @@
+<%- include('partials/header') %>
+<%- include('partials/breadcrumb') %>
+<%- include('partials/assign-intro') %>
+
+<% if (error) { %>
+  <div class="alert alert-danger" role="alert"><%= error %></div>
+<% } %>
+
+<form class="mform filemanager-form" method="post" action="/mod/assign/view.php?id=<%= activity.id %>&action=savesubmission" enctype="multipart/form-data">
+  <fieldset class="collapsible-fieldset">
+    <legend>
+      <button type="button" class="section-chevron" aria-expanded="true"><i class="fa fa-chevron-down"></i></button>
+      <span>Agregar entrega</span>
+    </legend>
+    <div class="fieldset-body">
+      <div class="form-row">
+        <label class="col-form-label">Archivos enviados</label>
+        <div class="form-field">
+          <div class="filemanager-limits">Tamaño máximo de archivo: 200 MB, número máximo de archivos: 20</div>
+          <%- include('partials/filemanager', { files: submission ? submission.files : [], downloadBase: '/pluginfile.php/submission/' }) %>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+  <hr class="form-separator">
+  <div class="form-buttons">
+    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    <a class="btn btn-secondary" href="/mod/assign/view.php?id=<%= activity.id %>">Cancelar</a>
+  </div>
+</form>
+
+<%- include('partials/footer', { scripts: ['/js/filemanager.js'] }) %>

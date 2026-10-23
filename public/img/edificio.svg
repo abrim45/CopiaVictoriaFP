@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1100" viewBox="0 0 1200 1100">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0b2a6b"/>
+      <stop offset="1" stop-color="#3f7fd0"/>
+    </linearGradient>
+    <linearGradient id="wall" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f4f5f7"/>
+      <stop offset="1" stop-color="#e3e6ea"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="1100" fill="url(#sky)"/>
+  <!-- Edificio genérico (ilustración provisional: sustituir por public/img/edificio.jpg) -->
+  <polygon points="110,250 1200,520 1200,1000 110,1000" fill="url(#wall)"/>
+  <polygon points="520,170 900,110 900,330 520,380" fill="#ffffff"/>
+  <polygon points="900,110 1200,190 1200,420 900,330" fill="#eceff2"/>
+  <rect x="930" y="230" width="230" height="110" fill="#5b6773" opacity=".55"/>
+  <line x1="600" y1="80" x2="600" y2="190" stroke="#c9ced4" stroke-width="5"/>
+  <line x1="670" y1="65" x2="670" y2="180" stroke="#c9ced4" stroke-width="5"/>
+  <line x1="740" y1="55" x2="740" y2="170" stroke="#c9ced4" stroke-width="5"/>
+  <path d="M600 82 q30 10 55 0 v45 q-25 10 -55 0z" fill="#1f4fbf"/>
+  <path d="M670 67 q30 10 55 0 v45 q-25 10 -55 0z" fill="#d9302c"/>
+  <path d="M670 82 q30 10 55 0 v15 q-25 10 -55 0z" fill="#f2c230"/>
+  <path d="M740 57 q30 10 55 0 v45 q-25 10 -55 0z" fill="#1c9a4b"/>
+  <path d="M740 72 q30 10 55 0 v15 q-25 10 -55 0z" fill="#ffffff"/>
+  <!-- Logotipo en la fachada -->
+  <image href="/img/logo.png" x="170" y="420" width="120" height="145"/>
+  <text x="300" y="520" font-family="Montserrat, Arial, sans-serif" font-size="44" font-weight="700" fill="#2b2f33">Victoria</text>
+  <text x="300" y="560" font-family="Montserrat, Arial, sans-serif" font-size="28" fill="#2b2f33">Institute of Technology</text>
+  <circle cx="290" cy="720" r="70" fill="#2b3036"/>
+  <circle cx="290" cy="720" r="55" fill="#4a5560"/>
+  <!-- Lona -->
+  <polygon points="560,470 1150,580 1150,800 560,700" fill="#5fa9e6"/>
+  <text x="640" y="610" font-family="Montserrat, Arial, sans-serif" font-size="40" font-weight="700" fill="#ffffff" transform="rotate(10 640 610)">la FP de tu</text>
+  <text x="640" y="665" font-family="Montserrat, Arial, sans-serif" font-size="48" font-weight="700" fill="#ffffff" transform="rotate(10 640 665)">FUTURO</text>
+  <!-- Ventanas -->
+  <g fill="#2b3036">
+    <rect x="300" y="860" width="140" height="70"/>
+    <rect x="620" y="880" width="140" height="70"/>
+    <rect x="960" y="900" width="140" height="70"/>
+  </g>
+  <rect x="0" y="1000" width="1200" height="100" fill="#4a4f55"/>
+  <rect x="0" y="1060" width="1200" height="14" fill="#f2c230"/>
+</svg>

@@ -1,0 +1,49 @@
+<%- include('partials/header') %>
+<%- include('partials/breadcrumb') %>
+
+<% if (activity.intro) { %>
+  <div class="activity-description-box"><div class="activity-intro"><%- activity.intro %></div></div>
+<% } %>
+
+<% if (showForm) { %>
+  <form class="mform forum-form card" method="post" action="/mod/forum/view.php?id=<%= activity.id %>">
+    <div class="form-row">
+      <label class="col-form-label" for="subject">Asunto <i class="fa fa-circle-exclamation text-danger" title="Requerido"></i></label>
+      <div class="form-field"><input class="form-control" id="subject" name="subject" required maxlength="255"></div>
+    </div>
+    <div class="form-row">
+      <label class="col-form-label" for="message">Mensaje <i class="fa fa-circle-exclamation text-danger" title="Requerido"></i></label>
+      <div class="form-field"><textarea class="form-control" id="message" name="message" rows="6" required></textarea></div>
+    </div>
+    <div class="form-buttons">
+      <button type="submit" class="btn btn-primary">Enviar al foro</button>
+      <a class="btn btn-secondary" href="/mod/forum/view.php?id=<%= activity.id %>">Cancelar</a>
+    </div>
+  </form>
+<% } else { %>
+  <div class="submission-actions">
+    <a class="btn btn-primary" href="/mod/forum/view.php?id=<%= activity.id %>&new=1">Añadir un nuevo tema de debate</a>
+  </div>
+<% } %>
+
+<% if (!discussions.length) { %>
+  <div class="alert alert-info">Todavía no hay temas de debate en este foro</div>
+<% } else { %>
+  <div class="table-responsive">
+    <table class="generaltable discussion-list">
+      <thead><tr><th>Debate</th><th>Comenzado por</th><th>Respuestas</th><th>Último mensaje</th></tr></thead>
+      <tbody>
+        <% discussions.forEach(d => { %>
+          <tr>
+            <td><a href="/mod/forum/discuss.php?d=<%= d.id %>"><%= d.subject %></a></td>
+            <td><span class="avatar avatar-sm"><%= fmt.initials(d) %></span> <%= fmt.fullname(d) %></td>
+            <td><%= d.replies %></td>
+            <td><%= fmt.userdate(d.lastpost) %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+<% } %>
+
+<%- include('partials/footer') %>

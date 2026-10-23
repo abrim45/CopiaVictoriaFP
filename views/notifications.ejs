@@ -1,0 +1,34 @@
+<%- include('partials/header', { wide: true }) %>
+
+<h1 class="page-title">Notificaciones</h1>
+
+<div class="notifications-page card">
+  <div class="notifications-list">
+    <% if (!list.length) { %><p class="popover-empty">No tiene notificaciones</p><% } %>
+    <% list.forEach(n => { %>
+      <a class="notif-item<%= n.read ? '' : ' unread' %><%= selected && selected.id === n.id ? ' selected' : '' %>" href="/message/output/popup/notifications.php?notificationid=<%= n.id %>">
+        <i class="fa fa-pen-fancy notif-icon"></i>
+        <span class="notif-body">
+          <span class="notif-subject"><%= n.subject %></span>
+          <span class="notif-time"><%= fmt.timeAgo(n.created) %></span>
+        </span>
+      </a>
+    <% }) %>
+  </div>
+  <div class="notification-detail">
+    <% if (selected) { %>
+      <div class="notification-detail-header">
+        <span class="avatar"><%= selected.fromName.split(' ').map(w => w[0]).slice(0, 2).join('') %></span>
+        <div>
+          <strong><%= selected.fromName %></strong>
+          <div class="text-muted"><%= fmt.userdate(selected.created) %></div>
+        </div>
+      </div>
+      <h3><%= selected.subject %></h3>
+      <p><%= selected.body %></p>
+      <% if (selected.url) { %><a class="btn btn-primary" href="<%= selected.url %>">Ver</a><% } %>
+    <% } %>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

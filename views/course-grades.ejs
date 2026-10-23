@@ -1,0 +1,32 @@
+<%- include('partials/header') %>
+<%- include('partials/course-header') %>
+
+<h2 class="h-section">Informe del usuario - <%= user.fullname %></h2>
+<div class="table-responsive">
+  <table class="generaltable grade-report">
+    <thead>
+      <tr><th>Ítem de calificación</th><th>Calificación</th><th>Rango</th><th>Porcentaje</th><th>Retroalimentación</th></tr>
+    </thead>
+    <tbody>
+      <tr class="grade-category"><td colspan="5"><i class="fa fa-folder"></i> <%= course.fullname %></td></tr>
+      <% items.forEach(i => { %>
+        <tr>
+          <td><%- icons.modIcon('assign', 'activityicon-sm') %> <a href="/mod/assign/view.php?id=<%= i.id %>"><%= i.name %></a></td>
+          <td><%= fmt.grade(i.grade) %></td>
+          <td>0–10</td>
+          <td><%= i.grade !== null ? fmt.grade(i.grade * 10) + ' %' : '-' %></td>
+          <td><%- i.feedback || '' %></td>
+        </tr>
+      <% }) %>
+      <tr class="grade-total">
+        <td><strong>Total del curso</strong></td>
+        <td><%= fmt.grade(total) %></td>
+        <td>0–10</td>
+        <td><%= total !== null ? fmt.grade(total * 10) + ' %' : '-' %></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<%- include('partials/footer') %>

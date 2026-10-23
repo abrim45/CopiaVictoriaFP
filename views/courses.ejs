@@ -1,0 +1,43 @@
+<%- include('partials/header') %>
+
+<h1 class="page-title">Mis cursos</h1>
+
+<section class="block block-myoverview">
+  <h5 class="block-title">Vista general de curso</h5>
+  <div class="courses-controls">
+    <div class="dropdown">
+      <button type="button" class="btn btn-outline" data-toggle="dropdown" data-target="#courses-grouping"><span id="grouping-label">Todos</span> <i class="fa fa-chevron-down"></i></button>
+      <div class="dropdown-menu" id="courses-grouping">
+        <button type="button" data-grouping="all" class="active">Todos</button>
+        <div class="dropdown-divider"></div>
+        <button type="button" data-grouping="inprogress">En progreso</button>
+        <button type="button" data-grouping="future">Futuros</button>
+        <button type="button" data-grouping="past">Pasados</button>
+        <div class="dropdown-divider"></div>
+        <button type="button" data-grouping="favourites">Destacados</button>
+        <div class="dropdown-divider"></div>
+        <button type="button" data-grouping="hidden">Eliminado de la vista</button>
+      </div>
+    </div>
+    <input type="search" class="form-control courses-search" id="courses-search" placeholder="Buscar" aria-label="Buscar cursos">
+    <div class="dropdown">
+      <button type="button" class="btn btn-outline" data-toggle="dropdown" data-target="#courses-sort"><span id="sort-label">Ordenar por nombre del curso</span> <i class="fa fa-chevron-down"></i></button>
+      <div class="dropdown-menu" id="courses-sort">
+        <button type="button" data-sort="title" class="active">Ordenar por nombre del curso</button>
+        <button type="button" data-sort="lastaccess">Ordenar por último acceso</button>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button type="button" class="btn btn-outline" data-toggle="dropdown" data-target="#courses-view"><span id="view-label">Tarjeta</span> <i class="fa fa-chevron-down"></i></button>
+      <div class="dropdown-menu" id="courses-view">
+        <button type="button" data-view="card" class="active">Tarjeta</button>
+        <button type="button" data-view="list">Lista</button>
+        <button type="button" data-view="summary">Resumen</button>
+      </div>
+    </div>
+  </div>
+  <div id="courses-container"></div>
+  <script type="application/json" id="courses-data"><%- JSON.stringify(courses).replace(/</g, '\\u003c') %></script>
+</section>
+
+<%- include('partials/footer', { scripts: ['/js/courses.js'] }) %>
